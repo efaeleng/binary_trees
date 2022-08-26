@@ -1,20 +1,34 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_uncle - Finds the uncle of a node
- *                     in a binary tree.
- * @node: A pointer to the node to find the uncle of.
+ * binary_tree_balance - Measures the balance factor of a binary tree.
+ * @tree: A pointer to the root node of the tree to measure the balance factor.
  *
- * Return: If node is NULL or has no uncle, NULL.
- *         Otherwise, a pointer to the uncle node.
+ * Return: If tree is NULL, return 0, else return balance factor.
  */
-binary_tree_t *binary_tree_uncle(binary_tree_t *node)
+int binary_tree_balance(const binary_tree_t *tree)
 {
-	if (node == NULL ||
-	    node->parent == NULL ||
-	    node->parent->parent == NULL)
-		return (NULL);
-	if (node->parent->parent->left == node->parent)
-		return (node->parent->parent->right);
-	return (node->parent->parent->left);
+	if (tree)
+		return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
+
+	return (0);
+}
+
+/**
+ * binary_tree_height - Measures the height of a binary tree.
+ * @tree: A pointer to the root node of the tree to measure the height.
+ *
+ * Return: If tree is NULL, your function must return 0, else return height.
+ */
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	if (tree)
+	{
+		size_t l = 0, r = 0;
+
+		l = tree->left ? 1 + binary_tree_height(tree->left) : 1;
+		r = tree->right ? 1 + binary_tree_height(tree->right) : 1;
+		return ((l > r) ? l : r);
+	}
+	return (0);
 }
