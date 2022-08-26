@@ -12,6 +12,7 @@
  *              takes its place and the old left-child is set as
  *              the left-child of the new node.
  */
+
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
 	binary_tree_t *new;
